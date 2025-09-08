@@ -17,10 +17,12 @@ function renderTasks() {
 
   orderedTasks.forEach((task, index) => {
     const li = document.createElement("li");
+    li.className =
+      "grid gap-1.5 items-center border-b border-gray-100 p-2.5 bg-white";
     const span = document.createElement("span");
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.className = "task-checkbox";
+    checkbox.className = "task-checkbox mr-1.5";
     checkbox.checked = completedTasks.includes(task);
 
     checkbox.addEventListener("change", () => {
@@ -46,19 +48,22 @@ function renderTasks() {
       span.classList.add("completed");
     }
     const deleteButton = document.createElement("button");
-    deleteButton.innerHTML = "💩";
-    deleteButton.className = "delete-button";
+    deleteButton.innerHTML =
+      '<ion-icon name="close-circle-sharp" class="w-5 h-5 fill-current text-red-600 hover:text-red-700 transition-all duration-500 ease-out"></ion-icon>';
+    deleteButton.className = "delete-button flex";
 
     deleteButton.addEventListener("click", () => {
-      const originalIndex = tasks.indexOf(task);
-      tasks.splice(originalIndex, 1);
-      const completedIndex = completedTasks.indexOf(task);
-      if (completedIndex > -1) {
-        completedTasks.splice(completedIndex, 1);
+      if (confirm(`Are you sure you want to delete the task:\n "${task}"?`)) {
+        const originalIndex = tasks.indexOf(task);
+        tasks.splice(originalIndex, 1);
+        const completedIndex = completedTasks.indexOf(task);
+        if (completedIndex > -1) {
+          completedTasks.splice(completedIndex, 1);
+        }
+        localStorage.setItem("oldTasks", tasks.join(","));
+        localStorage.setItem("completedTasks", completedTasks.join(","));
+        renderTasks();
       }
-      localStorage.setItem("oldTasks", tasks.join(","));
-      localStorage.setItem("completedTasks", completedTasks.join(","));
-      renderTasks();
     });
 
     li.appendChild(deleteButton);
@@ -70,12 +75,15 @@ renderTasks();
 
 addTaskButton.addEventListener("click", () => {
   const task = taskInput.value.trim();
-  if (task && !tasks.includes(task)) {
-    tasks.unshift(task);
-    localStorage.setItem("oldTasks", tasks.join(","));
-    taskInput.value = "";
-    renderTasks();
+  if (!task) return;
+  if (tasks.includes(task)) {
+    alert("Task is already in the list!");
+    return;
   }
+  tasks.unshift(task);
+  localStorage.setItem("oldTasks", tasks.join(","));
+  taskInput.value = "";
+  renderTasks();
 });
 
 taskInput.addEventListener("keypress", (e) => {
