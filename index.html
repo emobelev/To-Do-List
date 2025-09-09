@@ -5,24 +5,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To Do List</title>
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <link favicon href="./src/images/favicon.ico" rel="icon" type="image/x-icon">
+  <link href="./src/output.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap"
+    rel="stylesheet">
+  <script defer src="./src/script.js"></script>
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center text-base p-5">
-  <div class="bg-gray-50 p-6 rounded-lg shadow-lg w-full max-w-md">
-    <h1 class="text-3xl font-bold text-center my-3">To Do List</h1>
+<body class="bg-gray-100 flex items-center justify-center text-base p-5 font-[Sofia_Sans] dark:bg-stone-900">
+  <div class="bg-gray-50 dark:bg-white/20 p-6 rounded-lg shadow-lg w-full max-w-md  ">
+    <h1 class="text-3xl font-bold text-center mb-5 dark:text-white">To Do List</h1>
+
     <div class="flex mb-4 rounded-lg shadow-md">
-      <input type="text" id="taskInput" class="flex-1 p-2.5 border-solid border-r-0 divide-gray-200 rounded-l-md "
+      <input type="text" id="taskInput"
+        class="flex-1 p-2.5 bg-white dark:bg-black dark:text-white border-solid border-r-0 divide-gray-200 rounded-l-md focus:outline-0 dark:placeholder-white"
         placeholder="Add a new task...">
       <button id="addTaskButton"
-        class="py-2.5 px-5 border-none rounded-r-md text-white bg-green-600 hover:bg-green-700 cursor-pointer transition-all duration-500 ease-out">Add
+        class="py-2.5 px-5 border-none rounded-r-md text-white dark:text-black bg-green-600 hover:bg-green-700 cursor-pointer transition-all duration-500 ease-out">Add
         Task</button>
     </div>
-    <ul id="taskList" class="list-none"></ul>
+    <ul id="taskList" class="list-none dark:text-white"></ul>
   </div>
 
 </body>
